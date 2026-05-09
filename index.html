@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro de Usuario</title>
+    <style>
+        :root {
+            --bg1: #a1c4fd;
+            --bg2: #c2e9fb;
+            --card: rgba(255, 255, 255, 0.55);
+            --border: rgba(255, 255, 255, 0.6);
+            --text: #1e293b;
+            --muted: #475569;
+            --accent: #3b82f6;
+            --accent2: #60a5fa;
+            --error: #ef4444;
+            --ok: #16a34a;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Inter', 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, var(--bg1) 0%, var(--bg2) 100%);
+            color: var(--text);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        header {
+            background: var(--card);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border);
+            padding: 20px;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: clamp(22px, 4vw, 28px);
+            font-weight: 700;
+            color: #1e3a8a;
+        }
+
+        main {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 40px 20px;
+        }
+
+        .form-container {
+            background: var(--card);
+            backdrop-filter: blur(14px);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            padding: 35px;
+            width: 100%;
+            max-width: 500px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+        }
+
+        .avatar {
+            display: block;
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin: 0 auto 25px auto;
+            border: 3px solid white;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 6px;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--muted);
+        }
+
+        input, select {
+            width: 100%;
+            padding: 12px 14px;
+            border-radius: 12px;
+            border: none;
+            background: rgba(255, 255, 255, 0.8);
+            color: var(--text);
+            font-size: 15px;
+            transition: 0.3s;
+        }
+
+        input:focus, select:focus {
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.35);
+        }
+
+        input[type="color"] {
+            height: 48px;
+            padding: 4px;
+            cursor: pointer;
+            border-radius: 12px;
+        }
+
+        input[type="date"] {
+            color-scheme: light;
+        }
+
+        .error-msg {
+            color: var(--error);
+            font-size: 12px;
+            margin-top: 5px;
+            display: none;
+            font-weight: 500;
+        }
+
+        input:invalid:not(:placeholder-shown) {
+            outline: 2px solid var(--error);
+        }
+
+        input:valid:not(:placeholder-shown) {
+            outline: 2px solid var(--ok);
+        }
+
+        button {
+            width: 100%;
+            padding: 14px;
+            margin-top: 10px;
+            border: none;
+            border-radius: 12px;
+            background: var(--accent);
+            color: white;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        button:hover {
+            background: #2563eb;
+            transform: translateY(-2px) scale(1.02);
+            box-shadow: 0 6px 18px rgba(59, 130, 246, 0.4);
+        }
+
+        .success-msg {
+            display: none;
+            margin-top: 15px;
+            padding: 12px;
+            background: rgba(22, 163, 74, 0.15);
+            color: var(--ok);
+            border-radius: 12px;
+            text-align: center;
+            font-weight: 600;
+        }
+
+        footer {
+            background: var(--card);
+            backdrop-filter: blur(12px);
+            border-top: 1px solid var(--border);
+            text-align: center;
+            padding: 15px;
+            font-size: 13px;
+            color: var(--muted);
+            font-weight: 500;
+        }
+
+        @media (max-width: 480px) {
+            .form-container { padding: 25px 20px; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Registro de Usuario</h1>
+    </header>
+
+    <main>
+        <form class="form-container" id="registroForm" novalidate>
+            <img src="https://i.pravatar.cc/150?img=3" alt="Imagen de perfil" class="avatar">
+
+            <div class="form-group">
+                <label for="nombre">Nombre completo</label>
+                <input type="text" id="nombre" name="nombre" placeholder="Juan Pérez" required>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Correo electrónico</label>
+                <input type="email" id="email" name="email" placeholder="correo@ejemplo.com" required>
+            </div>
+
+            <div class="form-group">
+                <label for="password">Contraseña</label>
+                <input type="password" id="password" name="password" placeholder="Mínimo 8 caracteres" minlength="8" required>
+                <span class="error-msg" id="passError">La contraseña debe tener mínimo 8 caracteres</span>
+            </div>
+
+            <div class="form-group">
+                <label for="fecha">Fecha de nacimiento</label>
+                <input type="date" id="fecha" name="fecha" required max="">
+            </div>
+
+            <div class="form-group">
+                <label for="color">Color favorito</label>
+                <input type="color" id="color" name="color" value="#3b82f6">
+            </div>
+
+            <div class="form-group">
+                <label for="pais">País</label>
+                
