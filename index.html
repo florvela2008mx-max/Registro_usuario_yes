@@ -51,7 +51,7 @@
             padding: 40px 20px;
         }
 
-        .form-container {
+       .form-container {
             background: var(--card);
             backdrop-filter: blur(14px);
             border: 1px solid var(--border);
@@ -62,7 +62,7 @@
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
         }
 
-        .avatar {
+       .avatar {
             display: block;
             width: 100px;
             height: 100px;
@@ -73,7 +73,7 @@
             box-shadow: 0 4px 12px rgba(0,0,0,0.15);
         }
 
-        .form-group {
+       .form-group {
             margin-bottom: 20px;
         }
 
@@ -112,7 +112,7 @@
             color-scheme: light;
         }
 
-        .error-msg {
+       .error-msg {
             color: var(--error);
             font-size: 12px;
             margin-top: 5px;
@@ -148,7 +148,7 @@
             box-shadow: 0 6px 18px rgba(59, 130, 246, 0.4);
         }
 
-        .success-msg {
+       .success-msg {
             display: none;
             margin-top: 15px;
             padding: 12px;
@@ -171,7 +171,7 @@
         }
 
         @media (max-width: 480px) {
-            .form-container { padding: 25px 20px; }
+           .form-container { padding: 25px 20px; }
         }
     </style>
 </head>
@@ -182,7 +182,7 @@
 
     <main>
         <form class="form-container" id="registroForm" novalidate>
-            <img src="IMG-20260509-WA0004.jpg " alt="Imagen de perfil" class="avatar">
+            <img src=" " alt="Imagen de perfil" class="avatar">
 
             <div class="form-group">
                 <label for="nombre">Nombre completo</label>
@@ -212,4 +212,54 @@
 
             <div class="form-group">
                 <label for="pais">País</label>
-                
+                <input list="paises" id="pais" name="pais" placeholder="Escribe o selecciona tu país" required>
+                <datalist id="paises">
+                    <option value="México">
+                    <option value="Argentina">
+                    <option value="Colombia">
+                    <option value="España">
+                    <option value="Estados Unidos">
+                    <option value="Perú">
+                    <option value="Chile">
+                    <option value="Guatemala">
+                </datalist>
+            </div>
+
+            <button type="submit">Registrarse</button>
+            <div class="success-msg" id="successMsg">✅ Registro exitoso</div>
+        </form>
+    </main>
+
+    <footer>
+        <p>© 2026 Registro de Usuario. Todos los derechos reservados.</p>
+    </footer>
+
+    <script>
+        // Limitar fecha de nacimiento a hoy
+        document.getElementById('fecha').max = new Date().toISOString().split("T")[0];
+
+        const form = document.getElementById('registroForm');
+        const password = document.getElementById('password');
+        const passError = document.getElementById('passError');
+        const successMsg = document.getElementById('successMsg');
+
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Validación extra de contraseña
+            if(password.value.length < 8) {
+                passError.style.display = 'block';
+                return;
+            } else {
+                passError.style.display = 'none';
+            }
+
+            if(form.checkValidity()) {
+                successMsg.style.display = 'block';
+                form.reset();
+                setTimeout(() => successMsg.style.display = 'none', 3000);
+            }
+        });
+    </script>
+</body>
+</html>
